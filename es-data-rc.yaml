@@ -24,7 +24,10 @@ spec:
           capabilities:
             add:
               - IPC_LOCK
-        image: quay.io/pires/docker-elasticsearch-kubernetes:2.3.3
+        # This image omits the 'http.cors' section so it can work with Kibana.
+        # See issue https://github.com/elastic/kibana/issues/6719 for details.
+        image: gcr.io/vic-k8-1352/elasticsearch-k8:latest
+        # image: quay.io/pires/docker-elasticsearch-kubernetes:2.3.3
         imagePullPolicy: Always
         env:
         - name: NAMESPACE
@@ -32,7 +35,7 @@ spec:
             fieldRef:
               fieldPath: metadata.namespace
         - name: "CLUSTER_NAME"
-          value: "myesdb"
+          value: "k8-es-cluster"
         - name: NODE_MASTER
           value: "false"
         - name: HTTP_ENABLE
@@ -45,6 +48,5 @@ spec:
         - mountPath: /data
           name: storage
       volumes:
-          - emptyDir:
-              medium: ""
+          - emptyDir: {}
             name: "storage"
