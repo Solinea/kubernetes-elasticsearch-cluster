@@ -1,4 +1,49 @@
-# kubernetes-elasticsearch-cluster
+
+# gsk-search
+
+**gsk-search** consists of Kubernetes service definition files that can be use to create an Elasticsearch cluster on the Google Cloud and other Kubernetes cloud platforms. The **gsk-search** service is exposed only to other cloud platform cluster nodes, but it does publically expose a Kibana UI service - **gsk-kibana** - which can be used to explore the data in the Elasticsearch cluster.
+
+**NOTE**: This repo is actually a clone of the [kubernetes-elasticsearch-cluster](#kec) described in a subsequent section. The Kibana Docker image and K8 services files are not part of this original repo and have ben added here.
+
+## Build and Deploy Images
+
+1. First you need to build a Kibana Docker image and push it to Google Cloud Platform. Assuming you checked out the *kubernetes-elasticsearch-cluster* repo in your home directory, run these commands, changing the PROJECT_ID to your GCE project:
+
+   ```
+   cd $HOME/kubernetes-elasticsearch-cluster/
+   docker build -t gcr.io/PROJECT_ID/gsk-search:latest .
+   gcloud docker push gcr.io/PROJECT_ID/gsk-search:latest
+   ```
+
+2. Next you need to build a Kibana Docker image and push it to Google Cloud Platform. Run these commands, again changing the PROJECT_ID to your GCE project:
+
+   ```
+   cd $HOME/kubernetes-elasticsearch-cluster/kibana-image
+   docker build -t gcr.io/PROJECT_ID/gsk-kibana:latest .
+   gcloud docker push gcr.io/PROJECT_ID/gsk-kibana:latest
+   ```
+
+## Testing **gsk-search** and **gsk-kibana**
+
+1. To start up **gsk-search** and **gsk-kibana** run this script which will create 1 Elasticsearch master node, 1 Elasticsearch data node, and 1 Elasticsearch master node:
+
+   ```
+   start_es.sh
+   ```
+2. After this scritp completes it will display the public IP and port of the **gsk-kibana** service. You can open the Kibana console in a browser by going to ```http://<gsk-kibana-IP>:<gsk-kibana-port>```.
+
+3. You can and should scale the Elasticsearch cluster to have 3 master nodes to avoid split brain syndrome. Running this script will do that as well as create 2 client and 2 data nodes. You add more nodes my modifying the scipt and running it again.
+
+   ```
+   scale_es.sh
+   ```
+4. Run this script to stop **gsk-search** and **gsk-kibana**
+
+   ```
+   stop_es.sh
+   ```   
+
+## <a name="kec">kubernetes-elasticsearch-cluster details</a>
 Elasticsearch (2.3.3) cluster on top of Kubernetes made easy.
 
 Elasticsearch best-practices recommend to separate nodes in three roles:
@@ -10,18 +55,18 @@ Given this, I'm hereby making possible for you to scale as needed. For instance,
 
 *Attention:* As of the moment, Kubernetes pod descriptors use an `emptyDir` for storing data in each data node container. This is meant to be for the sake of simplicity and should be adapted according to your storage needs.
 
-## Pre-requisites
+### Pre-requisites
 
 * Kubernetes cluster (tested with v1.2.4 on top of [Vagrant + CoreOS](https://github.com/pires/kubernetes-vagrant-coreos-cluster))
 * `kubectl` configured to access your cluster master API Server
 
-## Build images (optional)
+### Build images (optional)
 
 Providing your own version of [the images automatically built from this repository](https://github.com/pires/docker-elasticsearch-kubernetes) will not be supported. This is an *optional* step. You have been warned.
 
-## Test
+### Test
 
-### Deploy
+#### Deploy
 
 ```
 kubectl create -f service-account.yaml
@@ -83,7 +128,7 @@ $ kubectl logs -f es-master-tile7
 
 As you can assert, the cluster is up and running. Easy, wasn't it?
 
-### Scale
+#### Scale
 
 Scaling each type of node to handle your cluster is as easy as:
 
