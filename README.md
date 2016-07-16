@@ -6,7 +6,7 @@
 
 ## Build and Deploy Images
 
-1. Check out the [docker-elasticsearch-kubernetes](https://github.com/Solinea/docker-elasticsearch-kubernetes).
+1. Check out the [docker-elasticsearch-kubernetes](https://github.com/Solinea/docker-elasticsearch-kubernetes) repo.
 
 2. Build an Elasticsearch Docker image and push it to Google Cloud Platform by running these commands in your repo directory, changing the PROJECT_ID to your GCE project:
 
