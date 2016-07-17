@@ -2,7 +2,7 @@
 
 **gsk-search** consists of Kubernetes service definition files that can be use to create an Elasticsearch cluster on the Google Cloud and other Kubernetes cloud platforms. The **gsk-search** service is exposed only to other cloud platform cluster nodes, but it does publicly expose a Kibana UI service - **gsk-kibana** - which can be used to explore the data in the Elasticsearch cluster.
 
-**NOTE**: This repo is actually a clone of the [kubernetes-elasticsearch-cluster](#kec) described in a subsequent section. The Kibana Docker image and K8 services files are not part of this original repo and have ben added here.
+**NOTE**: This repo is actually a clone of the [kubernetes-elasticsearch-cluster](#kec) described in a subsequent section. The Kibana Docker image and K8 services files are not part of this original repo and have been added here. These files should probably live elsewhere.
 
 ## Build and Deploy Images
 
