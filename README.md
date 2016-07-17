@@ -15,7 +15,7 @@
    gcloud docker push gcr.io/PROJECT_ID/gsk-search:latest
    ```
 
-2. Build a Kibana Docker image and push it to Google Cloud Platform. Run these commands in the *kibana-image* directory, again changing the PROJECT_ID to your GCE project:
+3. Build a Kibana Docker image and push it to Google Cloud Platform. Run these commands in the *kibana-image* directory, again changing the PROJECT_ID to your GCE project:
 
    ```
    docker build -t gcr.io/PROJECT_ID/gsk-kibana:latest .
@@ -24,14 +24,14 @@
 
 ## Run **gsk-search** and **gsk-kibana**
 
-1. To start up **gsk-search** and **gsk-kibana** run this script which will create 1 Elasticsearch master node, 1 Elasticsearch data node, and 1 Elasticsearch master node:
+1. To start up **gsk-search** and **gsk-kibana** run this script which will create 3 Elasticsearch master node, 1 Elasticsearch data node, and 1 Elasticsearch client node:
 
    ```
    start_es.sh
    ```
 2. After this script completes it will display the public IP and port of the **gsk-kibana** service. You can open the Kibana console in a browser by going to ```http://<gsk-kibana-IP>:<gsk-kibana-port>```.
 
-3. You can and should scale the Elasticsearch cluster to have 3 master nodes to avoid split brain syndrome. Running this script will do that as well as create 2 client and 2 data nodes. You can add more nodes if desired my modifying the script and running it again.
+3. You can scale the Elasticsearch cluster to have additional data and client nodes by running this script:
 
    ```
    scale_es.sh
