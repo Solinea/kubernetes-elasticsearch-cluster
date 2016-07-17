@@ -6,7 +6,8 @@ metadata:
     component: elasticsearch
     role: master
 spec:
-  replicas: 1
+  # Numbe of master nodes must be 3 to avoid split brain syndrome
+  replicas: 3
   selector:
     component: elasticsearch
     role: master
