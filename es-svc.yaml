@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: gsk-search 
+  name: gsk-search
   labels:
     component: elasticsearch
     role: client
@@ -13,3 +13,5 @@ spec:
   - name: http
     port: 9200
     protocol: TCP
+# Comment out following line for testing direct queries    
+#  type: LoadBalance
