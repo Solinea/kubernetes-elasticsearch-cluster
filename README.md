@@ -15,14 +15,17 @@
    gcloud docker push gcr.io/PROJECT_ID/gsk-search:latest
    ```
 
-3. Build a Kibana Docker image and push it to Google Cloud Platform. Run these commands in the *kibana-image* directory, again changing the PROJECT_ID to your GCE project:
+3. Replace the ```containers.image``` fields in *es-client-rc.yaml*, *es-master-rc.yaml*, and *es-data-rc.yaml* to the name of the image you created in the previous step or set it to the official name of the production Solinea image.
+4. Build a Kibana Docker image and push it to Google Cloud Platform. Run these commands in the *kibana-image* directory, again changing the PROJECT_ID to your GCE project:
 
    ```
    docker build -t gcr.io/PROJECT_ID/gsk-kibana:latest .
    gcloud docker push gcr.io/PROJECT_ID/gsk-kibana:latest
    ```
 
-## Run **gsk-search** and **gsk-kibana**
+5. Replace the ```containers.image``` field in *kibana-rc.yaml* to the name of the image you created in the previous step or set it to the official name of the production Solinea image.
+
+## Run
 
 1. To start up **gsk-search** and **gsk-kibana** run this script which will create 3 Elasticsearch master node, 1 Elasticsearch data node, and 1 Elasticsearch client node:
 
