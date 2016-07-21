@@ -8,7 +8,7 @@
 
 1. Check out the [docker-elasticsearch-kubernetes](https://github.com/Solinea/docker-elasticsearch-kubernetes) repo.
 
-2. Build an Elasticsearch Docker image and push it to Google Cloud Platform by running these commands in your repo directory, changing the PROJECT_ID to your GCE project:
+2. Build an Elasticsearch Docker image and push it to Google Cloud Platform by running these commands in your repo directory, changing the PROJECT_ID to your GKE project:
 
    ```
    docker build -t gcr.io/PROJECT_ID/gsk-search:latest .
@@ -16,7 +16,7 @@
    ```
 
 3. Replace the ```containers.image``` fields in *es-client-rc.yaml*, *es-master-rc.yaml*, and *es-data-rc.yaml* to the name of the image you created in the previous step or set it to the official name of the production Solinea image.
-4. Build a Kibana Docker image and push it to Google Cloud Platform. Run these commands in the *kibana-image* directory, again changing the PROJECT_ID to your GCE project:
+4. Build a Kibana Docker image and push it to Google Cloud Platform. Run these commands in the *kibana-image* directory, again changing the PROJECT_ID to your GKE project:
 
    ```
    docker build -t gcr.io/PROJECT_ID/gsk-kibana:latest .
@@ -27,23 +27,10 @@
 
 ## Run
 
-1. To start up **gsk-search** and **gsk-kibana** run this script which will create 3 Elasticsearch master node, 1 Elasticsearch data node, and 1 Elasticsearch client node:
-
-   ```
-   start_es.sh
-   ```
+1. To start up **gsk-search** and **gsk-kibana** run ```start_es.sh``` which will create 3 Elasticsearch master node, 1 Elasticsearch data node, and 1 Elasticsearch client node:
 2. After this script completes it will display the public IP and port of the **gsk-kibana** service. You can open the Kibana console in a browser by going to ```http://<gsk-kibana-IP>:<gsk-kibana-port>```.
-
-3. You can scale the Elasticsearch cluster to have additional data and client nodes by running this script:
-
-   ```
-   scale_es.sh
-   ```
-4. Run this script to stop **gsk-search** and **gsk-kibana**
-
-   ```
-   stop_es.sh
-   ```   
+3. You can scale the Elasticsearch cluster by the setting the number of client and data nodes that you want in ```scale_es.sh``` then running it.
+4. Run ```stop_es.sh ```to stop **gsk-search** and **gsk-kibana**
 
 ## <a name="kec">kubernetes-elasticsearch-cluster details</a>
 Elasticsearch (2.3.3) cluster on top of Kubernetes made easy.
