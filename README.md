@@ -30,7 +30,7 @@
 1. To start up **gsk-search** and **gsk-kibana** run ```start_es.sh``` which will create 3 Elasticsearch master node, 1 Elasticsearch data node, and 1 Elasticsearch client node:
 2. After this script completes it will display the public IP and port of the **gsk-kibana** service. You can open the Kibana console in a browser by going to ```http://<gsk-kibana-IP>:<gsk-kibana-port>```.
 3. You can scale the Elasticsearch cluster by the setting the number of client and data nodes that you want in ```scale_es.sh``` then running it.
-4. Run ```stop_es.sh ```to stop **gsk-search** and **gsk-kibana**
+4. Run ```stop_es.sh ``` to stop **gsk-search** and **gsk-kibana**
 
 ## <a name="kec">kubernetes-elasticsearch-cluster details</a>
 Elasticsearch (2.3.3) cluster on top of Kubernetes made easy.
