@@ -8,17 +8,18 @@
 
 1. Check out the [docker-elasticsearch-kubernetes](https://github.com/Solinea/docker-elasticsearch-kubernetes) repo.
 
-2. Build an Elasticsearch Docker image and push it to Google Cloud Platform by running these commands in your repo directory, changing the PROJECT_ID to your GKE project:
+2. cd to your *docker-elasticsearch-kubernetes* directory, then build an Elasticsearch Docker image and push it to Google Cloud Platform by running these commands in your repo directory, changing the PROJECT_ID to your GKE project.
 
    ```
-   docker build -t gcr.io/PROJECT_ID/gsk-search:latest .
-   gcloud docker push gcr.io/PROJECT_ID/gsk-search:latest
+   docker build -t gcr.io/PROJECT_ID/elasticsearch-k8:latest .
+   gcloud docker push gcr.io/PROJECT_ID/elasticsearch-k8:latest
    ```
 
-3. Replace the ```containers.image``` fields in *es-client-rc.yaml*, *es-master-rc.yaml*, and *es-data-rc.yaml* to the name of the image you created in the previous step or set it to the official name of the production Solinea image.
+3. cd to your *kubernetes-elasticsearch-cluster* directory, then replace the ```containers.image``` fields in *es-client-rc.yaml*, *es-master-rc.yaml*, and *es-data-rc.yaml* to the name of the image you created in the previous step or set it to the official name of the production Solinea image.
 4. Build a Kibana Docker image and push it to Google Cloud Platform. Run these commands in the *kibana-image* directory, again changing the PROJECT_ID to your GKE project:
 
    ```
+   cd kibana-image
    docker build -t gcr.io/PROJECT_ID/gsk-kibana:latest .
    gcloud docker push gcr.io/PROJECT_ID/gsk-kibana:latest
    ```
