@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Creating gsk-search and gsk-kibana services..."
+echo "Creating elasticsearch and gsk-kibana services..."
 kubectl create -f service-account.yaml
 kubectl create -f es-discovery-svc.yaml
 kubectl create -f es-svc.yaml
