@@ -24,22 +24,25 @@ spec:
           capabilities:
             add:
               - IPC_LOCK
-        # This image omits the 'http.cors' section so it can work with Kibana.
-        # See issue https://github.com/elastic/kibana/issues/6719 for details.
-        image: gcr.io/vic-k8-1352/elasticsearch-k8:latest
-        # image: quay.io/pires/docker-elasticsearch-kubernetes:2.3.3
+        image: gcr.io/PROJECT_ID/elasticsearch:latest
         imagePullPolicy: Always
         env:
         - name: NAMESPACE
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
-        - name: CLUSTER_NAME
+        - name: "CLUSTER_NAME"
           value: "k8-es-cluster"
         - name: NODE_MASTER
           value: "false"
         - name: HTTP_ENABLE
           value: "false"
+        - name: ES_HEAP_SIZE
+          value: "512m"
+        - name: NUMBER_OF_SHARDS
+          value: "3"
+        - name: NUMBER_OF_REPLICAS
+          value: "1"
         ports:
         - containerPort: 9300
           name: transport

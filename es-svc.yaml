@@ -13,5 +13,5 @@ spec:
   - name: http
     port: 9200
     protocol: TCP
-# Comment out following line for testing direct queries
+# Uncomment following line for testing direct queries
 #  type: LoadBalancer
