@@ -8,4 +8,5 @@ spec:
       targetPort: http
   selector:
     component: kibana
+# Comment out the following line to make Kibana private
   type: LoadBalancer
