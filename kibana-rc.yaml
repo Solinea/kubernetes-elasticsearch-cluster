@@ -17,8 +17,8 @@ spec:
       containers:
       - env:
           - name: ELASTICSEARCH_URL
-            value: http://gsk-search:9200
-        image: gcr.io/vic-k8-1352/gsk-kibana
+            value: http://elasticsearch:9200
+        image: gcr.io/PROJECT_ID/gsk-kibana
         name: kibana
         ports:
         - containerPort: 5601
