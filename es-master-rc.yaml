@@ -25,7 +25,7 @@ spec:
           capabilities:
             add:
               - IPC_LOCK
-        image: gcr.io/PROJECT_ID/elasticsearch:latest
+        image: gcr.io/solinea-dev/elasticsearch:latest
         imagePullPolicy: Always
         env:
         - name: NAMESPACE
