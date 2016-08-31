@@ -42,10 +42,8 @@ spec:
           value: "false"
         - name: ES_HEAP_SIZE
           value: "512m"
-        - name: NUMBER_OF_SHARDS
-          value: "3"
-        - name: NUMBER_OF_REPLICAS
-          value: "1"
+        - name: NUMBER_OF_MASTERS
+          value: "2"
         ports:
         - containerPort: 9300
           name: transport
