@@ -6,7 +6,8 @@ metadata:
     component: elasticsearch
     role: master
 spec:
-  # Number of master nodes must be 3 to avoid split brain syndrome
+  # Number of master nodes must be set to 3 and the (minimum) number
+  # of master nodes set to 2 to avoid split brain syndrome.
   replicas: 3
   selector:
     component: elasticsearch
@@ -21,7 +22,7 @@ spec:
       containers:
       - name: es-master
         securityContext:
-          privileged: false
+          privileged: true
           capabilities:
             add:
               - IPC_LOCK
@@ -42,6 +43,8 @@ spec:
           value: "false"
         - name: ES_HEAP_SIZE
           value: "512m"
+        # Number of master nodes must be set to 3 and the (minimum) number
+        # of master nodes set to 2 to avoid split brain syndrome.
         - name: NUMBER_OF_MASTERS
           value: "2"
         ports:
