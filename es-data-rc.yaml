@@ -35,6 +35,8 @@ spec:
           value: "k8-es-cluster"
         - name: NODE_MASTER
           value: "false"
+        - name: NODE_DATA
+          value: "true"
         - name: HTTP_ENABLE
           value: "false"
         - name: ES_HEAP_SIZE
