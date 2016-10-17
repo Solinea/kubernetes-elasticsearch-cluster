@@ -24,7 +24,7 @@ spec:
           capabilities:
             add:
               - IPC_LOCK
-        image: gcr.io/solinea-dev/elasticsearch:latest
+        image: gcr.io/goldstone-cloud/elasticsearch:latest
         imagePullPolicy: Always
         env:
         - name: NAMESPACE
@@ -49,6 +49,9 @@ spec:
         - containerPort: 9300
           name: transport
           protocol: TCP
+        resources:
+          limits:
+            memory: 2Gi
         volumeMounts:
         - mountPath: /data
           name: storage
